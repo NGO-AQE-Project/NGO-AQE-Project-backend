@@ -23,7 +23,7 @@ export default defineType({
             },
             {
               name: 'field2',
-              type: 'text',
+              type: 'string',
             },
           ],
         },
