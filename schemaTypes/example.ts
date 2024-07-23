@@ -16,23 +16,28 @@ export default defineType({
               name: 'language',
               type: 'reference',
               to: [{type: 'language'}],
+              validation: (Rule) => Rule.required(),
             },
             {
               name: 'field1',
               type: 'string',
+              validation: (Rule) => Rule.required().error('Field1 is required.'),
             },
             {
               name: 'field2',
               type: 'string',
+              validation: (Rule) => Rule.required().error('Field2 is required.'),
             },
           ],
         },
       ],
+      validation: (Rule) => Rule.required().error('At least one language set is required.'),
     }),
     defineField({
       name: 'image',
       title: 'Image',
       type: 'image',
+      validation: (Rule) => Rule.required().error('Image is required.'),
     }),
   ],
 })
