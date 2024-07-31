@@ -129,6 +129,8 @@ Now stop the studio server you were running locally and make sure everything sti
 ## Typing 
 Add your doc type to `SanityDataTypes.ts` and into the `SanityData` type as an array
 
+Add `console.log(sanity.documents);` to `App.tsx` so you can see all the data we pull from sanity, making typing easier
+
 ![image](https://github.com/user-attachments/assets/3e48d8fe-006e-423a-929f-436ce0bd5ca1)
 
 ## Pulling the document from context
@@ -141,9 +143,7 @@ const document = sanity.documents?.partnersSection[0];
 
 When displaying only the correct translation onscreen, find the element with the correct language id, and pull your fields from there
 ```
-document.titleSet.find(
-          language => language.language._ref === languageId,
-        )?.title
+document.titleSet.find(set => set.language._ref === languageId)?.title
 ```
 
 And when you need the url of an image pull the `getImageUrl` from `SanityUrlBuilder.ts`
