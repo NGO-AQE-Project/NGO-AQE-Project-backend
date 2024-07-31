@@ -141,6 +141,8 @@ const languageId = sanity.selectedLanguage;
 const document = sanity.documents?.partnersSection[0];
 ```
 
+## Displaying the correct data
+
 When displaying only the correct translation onscreen, find the element with the correct language id, and pull your fields from there
 ```
 document.titleSet.find(set => set.language._ref === languageId)?.title
