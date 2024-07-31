@@ -124,7 +124,35 @@ ONLY THEN run `npx sanity deploy`
 
 Now stop the studio server you were running locally and make sure everything still works, and has updated with your document type and the doc you filled out, on the remotely hosted instance of sanity (on their website)
 
-## The front end
+# The front end
+
+## Typing 
+Add your doc type to `SanityDataTypes.ts` and into the `SanityData` type as an array
+
+![image](https://github.com/user-attachments/assets/3e48d8fe-006e-423a-929f-436ce0bd5ca1)
+
+## Pulling the document from context
+In your component simply use the context and pull your specific document array, using the first element
+```
+const sanity = useSanity();
+const languageId = sanity.selectedLanguage;
+const document = sanity.documents?.partnersSection[0];
+```
+
+When displaying only the correct translation onscreen, find the element with the correct language id, and pull your fields from there
+```
+document.titleSet.find(
+          language => language.language._ref === languageId,
+        )?.title
+```
+
+And when you need the url of an image pull the `getImageUrl` from `SanityUrlBuilder.ts`
+
+Example with my data layout:
+
+```<img src={getImageUrl(document.partnersArray[0].image)} />```
+
+
 
 
  
