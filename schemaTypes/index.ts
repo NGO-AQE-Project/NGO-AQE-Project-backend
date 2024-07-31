@@ -1,6 +1,6 @@
 import example from './example'
 import language from './language'
 import {localeString} from './localeStringType'
-import partners from './partners'
+import partnersSection from './partnersSection'
 
-export const schemaTypes = [localeString, language, example, partners]
+export const schemaTypes = [localeString, language, example, partnersSection]
