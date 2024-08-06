@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import { partner } from './partner'
 
 export default defineType({
   name: 'partnersSection',
@@ -6,71 +7,20 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'titleSet',
-      title: 'TitleSet',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            {
-              name: 'language',
-              type: 'reference',
-              to: [{type: 'language'}],
-              validation: (Rule) => Rule.required(),
-            },
-            {
-              name: 'title',
-              type: 'string',
-              validation: (Rule) => Rule.required().error('Title is required.'),
-            },
-          ],
-        },
-      ],
-      validation: (Rule) => Rule.required().error('Title is required.'),
+      name: 'title',
+      title: 'Title',
+      type: 'internationalizedArrayString',  
     }),
     defineField({
-      name: 'partnersArray',
-      title: 'Partners Array',
+      name: 'partners',
       type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'image',
-              title: 'Image',
-              type: 'image',
-              validation: (Rule) => Rule.required().error('Image is required.'),
-            }),
-            defineField({
-              name: 'descriptionSet',
-              title: 'DescriptionSet',
-              type: 'array',
-              of: [
-                {
-                  type: 'object',
-                  fields: [
-                    {
-                      name: 'language',
-                      type: 'reference',
-                      to: [{type: 'language'}],
-                      validation: (Rule) => Rule.required(),
-                    },
-                    {
-                      name: 'description',
-                      type: 'string',
-                      validation: (Rule) => Rule.required().error('Description is required.'),
-                    },
-                  ],
-                },
-              ],
-              validation: (Rule) => Rule.required().error('Description is required.'),
-            }),
-          ],
-        },
-      ],
-      validation: (Rule) => Rule.required().error('At least one partner is required.'),
-    }),
+      of: [{type: 'reference', to: partner}]
+    })
   ],
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare: ({title}) => ({title: title[0].value || 'Untitled'})
+  }
 })
