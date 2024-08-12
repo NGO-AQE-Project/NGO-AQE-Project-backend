@@ -1,160 +1,107 @@
-An example of implementing CMS to a section (teh partners section specifically)
+# CMS Implementation Guide
 
-I dont really know what im doing. So anyway:
+Welcome to the CMS implementation guide! This document provides detailed information on the `partnersSection`, `partner`, and `language` schemas, including how to work with them and examples for fetching data. The `aboutSection` schema is also mentioned to illustrate document internalization.
 
-# The back end
+## Schema Overview
 
-## Launch sanity studio and open the codebase
-Just fork this repo and `npm run dev`
+### `language` Document
 
-Dont switch from the main branch
+The `language` document defines the languages available in the CMS:
 
-## Identify the data types and data layout
-Partners doc:
+- **Language Name:** Descriptive name for the language.
+- **Language Code:** ISO 639-1 code (e.g., "en" for English).
 
-* Title -  multi language strings
-* Partners - Array of:
-  * Image - image
-  * Description - multi language strings
-  
-![image](https://github.com/user-attachments/assets/f05d9069-1ad6-4ec9-8580-45c3968a23bd)
+This schema is essential for supporting multiple languages across your content.
 
-## Create the new document type
-Just copy and rename either this (`partnersSection.ts`) or `example.ts`
+### `partner` Document
 
-Plug the new file into `index.ts`
+The `partner` document represents individual partners:
 
-![image](https://github.com/user-attachments/assets/dc3c6b72-478c-477e-9e68-dc139fcfbfbd)
+- **Partner Name:** Multilingual names are managed using an internationalized array.
+- **Image:** Represents the partner with an image.
 
-## Create all the fields
-This will mostly be copying from already finished files and renaming values
+This schema allows you to manage partner entities with localized names and images.
 
-Generally, in a field, `name` is used for field name when stored in database, and `title` is displayed in the studio GUI
+### `partnersSection` Document
 
-The types of data we will use:
-* String - regular text value
-* Object - field containing other fields
-* Array - just an array, use `of` to type the elements it contains
-* Image - stores a single image file
-* multi language type - more complex, to see it properly look in `example.ts`, but it is an array, each element is required to have a language and any other fields are custom
+The `partnersSection` document groups multiple `partner` references:
 
-This is a field using all types:
+- **Title:** Multilingual title for the section.
+- **Partners Array:** Array of references to `partner` documents.
 
-Defining the field along with its names
+This schema organizes and displays a list of partners within a single section, with support for multiple languages.
+
+### `aboutSection` Document (Optional)
+
+The `aboutSection` schema is an example of document internalization:
+
+- **Language Field:** An internal field to specify the language.
+- **Title and Subsections:** Includes multilingual fields for titles and content.
+- **Image:** Associated image for the section.
+
+Use this schema to manage multilingual content at the document level, contrasting with array-based internalization.
+
+## Fetching Data
+
+Here are examples of how to fetch data from Sanity CMS. These examples illustrate how to retrieve data for the `partnersSection` and `language` schemas.
+
+### Example: Fetch Partners Section
+
 ```ts
-defineField({
-      name: 'partnersArray',
-      title: 'Partners Array',
+import client from './sanityClient'; // Adjust import based on your setup
+
+interface Partner {
+  _id: string;
+  name: string;
+  image: string; // URL of the image
+}
+
+interface PartnersSection {
+  _id: string;
+  title: string;
+  partners: Partner[];
+}
+
+export function fetchPartnersSection(language: string): Promise<PartnersSection> {
+  return client.fetch(`
+    *[_type == 'partnersSection'][0] {
+      _id,
+      "title": title[_key == "${language}"][0].value,
+      partners[] -> {
+        _id,
+        "name": name[_key == "${language}"][0].value,
+        "image": image.asset->url
+      }
+    }
+  `);
+}
 ```
-The array
+
+### Example: Fetch Languages
+
 ```ts
-
-      type: 'array',
-      of: [
-        {
-```
-the object
-```ts
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'image',
-              title: 'Image',
-              type: 'image',
-              validation: (Rule) => Rule.required().error('Image is required.'),
-            }),
-            defineField({
-              name: 'descriptionSet',
-              title: 'DescriptionSet',
-              type: 'array',
-```
-The multi language array
-```ts
-              of: [
-                {
-                  type: 'object',
-                  fields: [
-                    {
-                      name: 'language',
-                      type: 'reference',
-                      to: [{type: 'language'}],
-                      validation: (Rule) => Rule.required(),
-                    },
-```
-The string
-```ts
-                    {
-                      name: 'description',
-                      type: 'string',
-                      validation: (Rule) => Rule.required().error('Description is required.'),
-                    },
-                  ],
-                },
-              ],
-              validation: (Rule) => Rule.required().error('Description is required.'),
-            }),
-          ],
-        },
-      ],
-      validation: (Rule) => Rule.required().error('At least one partner is required.'),
-    }),
+export function fetchLanguages(): Promise<Language[]> {
+  return client.fetch(`
+    *[_type == "language"] {
+      _id,
+      title,
+      code,
+    }
+  `);
+}
 ```
 
-Things to remember:
-* Edit the validation error messages to match field names
-* When naming arrays:
-  * A regular array - example: "partnersArray"
-  * A language set array - example: "descriptionSet"   
+## Key Points
 
-(so we dont confuse the two types)
+- **Document vs. Array Internalization:** Use the `aboutSection` schema to understand document internalization. This schema shows how multilingual content can be managed within a single document. On the other hand, array internalization, such as in the `partnersSection`, involves managing translations within an array of objects.
 
-## Make sure all fields show up and are the correct type in studio
-Fill out ONE document in both languages and publish it
+- **Ensure Consistency:** Follow the defined schema structures and data types to maintain consistency across the CMS. Consistent naming and data handling are crucial for seamless integration and data integrity.
 
-![image](https://github.com/user-attachments/assets/755feb70-cd9e-4a70-8d0a-55c4c00723fe)
+- **Testing and Validation:** Always test your changes in Sanity Studio to ensure that the fields and validation rules work as expected. Additionally, verify that data retrieval functions are correctly fetching and displaying the data in your application.
 
-## Deploy the updated studio
-When you are confident everything is working as intended, pull from main to make sure you are up to date
+## Summary
 
-If nothing breaks you need to push your new commit to main
-
-ONLY THEN run `npx sanity deploy`
-
-(If you dont follow those steps correctly WE ALL EXPLODE)
-
-Now stop the studio server you were running locally and make sure everything still works, and has updated with your document type and the doc you filled out, on the remotely hosted instance of sanity (on their website)
-
-# The front end
-
-## Typing 
-Add your doc type to `SanityDataTypes.ts` and into the `SanityData` type as an array
-
-Add `console.log(sanity.documents);` to `App.tsx` so you can see all the data we pull from sanity, making typing easier
-
-![image](https://github.com/user-attachments/assets/3e48d8fe-006e-423a-929f-436ce0bd5ca1)
-
-## Pulling the document from context
-In your component simply use the context and pull your specific document array, using the first element
-```
-const sanity = useSanity();
-const languageId = sanity.selectedLanguage;
-const document = sanity.documents?.partnersSection[0];
-```
-
-## Displaying the correct data
-
-When displaying only the correct translation onscreen, find the element with the correct language id, and pull your fields from there
-```
-document.titleSet.find(set => set.language._ref === languageId)?.title
-```
-
-And when you need the url of an image pull the `getImageUrl` from `SanityUrlBuilder.ts`
-
-Example with my data layout:
-
-```<img src={getImageUrl(document.partnersArray[0].image)} />```
-
-
+This guide provides an overview of the `partnersSection`, `partner`, and `language` schemas, including examples for data fetching. The `aboutSection` schema is included to demonstrate document internalization, contrasting with array-based methods.
 
 
  
