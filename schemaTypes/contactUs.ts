@@ -60,7 +60,7 @@ export const contactUs = defineType({
       language: 'language',
     },
     prepare: ({ title, language }) => ({
-      title: `${title} (${language || 'No Language'})`,
+      title: `${title} (${language})`,
     }),
   },
 });

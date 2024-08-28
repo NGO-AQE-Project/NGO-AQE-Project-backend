@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 8,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1724832248171,
@@ -40,6 +40,10 @@
                 {
                     "date": 1724835030938,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n     defineField({\n       name: 'phoneNumber',\n       type: 'string',\n       title: 'Phone Number',\n-      validation: rule => rule.required().regex(/^\\+?[1-9]\\d{1,14}$/, {\n+      validation: rule => rule.required().regex(/^\\+?[1-9]\\d{0,3}[\\s.-]?\\(?\\d{1,4}\\)?[\\s.-]?\\d{1,4}[\\s.-]?\\d{1,4}[\\s.-]?\\d{1,9}$/, {\n         name: 'Phone number',\n         invert: false,\n       }),\n     }),\n"
+                },
+                {
+                    "date": 1724836732741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,8 +59,8 @@\n       title: 'title',\n       language: 'language',\n     },\n     prepare: ({ title, language }) => ({\n-      title: `${title} (${language || 'No Language'})`,\n+      title: `${title} (${language})`,\n     }),\n   },\n });\n"
                 }
             ],
             "date": 1724832248171,
