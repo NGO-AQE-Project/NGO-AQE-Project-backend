@@ -53,6 +53,17 @@ export const contactUs = defineType({
         invert: false,
       }),
     }),
+    defineField({
+      name: 'translations',
+      type: 'object',
+      title: 'Translations',
+      fields: [
+        {name: 'emailLabel', type: 'string', title: 'Email Label'},
+        {name: 'officeHoursLabel', type: 'string', title: 'Office Hours Label'},
+        {name: 'addressLabel', type: 'string', title: 'Address Label'},
+        {name: 'phoneNumberLabel', type: 'string', title: 'Phone Number Label'},
+      ],
+    }),
   ],
   preview: {
     select: {
