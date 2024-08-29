@@ -6,6 +6,8 @@ import {localeString} from './localeStringType'
 import {page} from './page'
 import {partner} from './partner'
 import partnersSection from './partnersSection'
+import { whyAQECard } from './whyAQECard'
+import whyAQESection from './whyAQESection'
 
 export const schemaTypes = [
   page,
@@ -16,4 +18,6 @@ export const schemaTypes = [
   partnersSection,
   partner,
   contactUs,
+  whyAQECard,
+  whyAQESection
 ]
