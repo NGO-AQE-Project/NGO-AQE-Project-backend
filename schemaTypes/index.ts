@@ -1,6 +1,7 @@
 import {aboutSection} from './aboutSection'
 import {contactUs} from './contactUs'
 import example from './example'
+import { homeSection } from './homeSection'
 import language from './language'
 import {localeString} from './localeStringType'
 import {page} from './page'
@@ -19,5 +20,6 @@ export const schemaTypes = [
   partner,
   contactUs,
   whyAQECard,
-  whyAQESection
+  whyAQESection,
+  homeSection,
 ]
