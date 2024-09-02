@@ -1,6 +1,8 @@
-import { defineType, defineField } from "sanity";
-import partnersSection from "./partnersSection";
-import { aboutSection } from "./aboutSection";
+import {defineField, defineType} from 'sanity'
+
+import {aboutSection} from './aboutSection'
+import gallerySection from './gallerySection'
+import partnersSection from './partnersSection'
 
 export const page = defineType({
   name: 'page',
@@ -29,12 +31,17 @@ export const page = defineType({
       name: 'partersSection',
       type: 'reference',
       to: partnersSection,
-    })
+    }),
+    defineField({
+      name: 'gallerySection',
+      type: 'reference',
+      to: gallerySection,
+    }),
   ],
   preview: {
     select: {
       language: 'language',
     },
     prepare: ({language}) => ({title: `Page(${language})`}),
-  }
-});
+  },
+})
