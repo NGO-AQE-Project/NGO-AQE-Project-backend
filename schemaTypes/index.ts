@@ -1,3 +1,4 @@
+import {aboutCard} from './aboutCard'
 import {aboutSection} from './aboutSection'
 import {contactUs} from './contactUs'
 import example from './example'
@@ -24,4 +25,5 @@ export const schemaTypes = [
   whyAQESection,
   galleryCard,
   gallerySection,
+  aboutCard,
 ]

@@ -5,39 +5,15 @@ export const aboutSection = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'language',
-      type: 'string',
-      readOnly: true,
-      hidden: true,
-      validation: rule => rule.required(),
-    }),
-    defineField({
       name: 'title',
-      type: 'string',
-      validation: rule => rule.required(),
+      title: 'Title',
+      type: 'internationalizedArrayString',
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'subsections', 
       type: 'array',
-      of: [
-        defineArrayMember({
-          name: 'subsection',
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'title',
-              type: 'string',
-              validation: rule => rule.required(),
-            }),
-            defineField({
-              name: 'text',
-              type: 'array',
-              of: [{type: 'block'}],
-              validation: rule => rule.required(),
-            })
-          ]
-        })
-      ]
+      of: [{type: 'reference', to: [{type: 'aboutCard'}]}],
     }),
     defineField({
       name: 'image',
@@ -47,8 +23,9 @@ export const aboutSection = defineType({
   preview: {
     select: {
       title: 'title',
-      language: 'language',
     },
-    prepare: ({title, language}) => ({title: `${title}(${language})`}),
-  }
+    prepare: ({title}) => ({
+      title: title?.[1]?.value || 'Untitled',
+    }),
+  },
 })
