@@ -1,6 +1,7 @@
 import {aboutSection} from './aboutSection'
 import {contactUs} from './contactUs'
 import example from './example'
+import formSection from './formSection'
 import {galleryCard} from './galleryCard'
 import gallerySection from './gallerySection'
 import language from './language'
@@ -28,4 +29,5 @@ export const schemaTypes = [
   gallerySection,
   trainingsCard,
   trainingsSection,
+  formSection,
 ]
