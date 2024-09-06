@@ -8,6 +8,8 @@ import {localeString} from './localeStringType'
 import {page} from './page'
 import {partner} from './partner'
 import partnersSection from './partnersSection'
+import {trainingsCard} from './trainingsCard'
+import trainingsSection from './trainingsSection'
 import {whyAQECard} from './whyAQECard'
 import whyAQESection from './whyAQESection'
 
@@ -24,4 +26,6 @@ export const schemaTypes = [
   whyAQESection,
   galleryCard,
   gallerySection,
+  trainingsCard,
+  trainingsSection,
 ]
