@@ -65,6 +65,18 @@ export default defineType({
       type: 'internationalizedArrayString',
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'fieldMissingError',
+      title: 'Field Missing Error',
+      type: 'internationalizedArrayString',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'fieldFormatError',
+      title: 'Field Format Error',
+      type: 'internationalizedArrayString',
+      validation: (rule) => rule.required(),
+    }),
   ],
   preview: {
     select: {
