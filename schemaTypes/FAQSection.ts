@@ -16,6 +16,16 @@ export const FAQSection = defineType({
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'FAQCard' }] }],
     }),
+    defineField({
+      name: 'footerText',
+      title: 'Footer Text',
+      type: 'internationalizedArrayString',
+    }),
+    defineField({
+      name: 'footerLink',
+      title: 'Footer Link',
+      type: 'internationalizedArrayString',
+    }),
   ],
   preview: {
     select: {
