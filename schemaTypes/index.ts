@@ -1,3 +1,5 @@
+import {FAQCard} from './FAQCard'
+import {FAQSection} from './FAQSection'
 import {aboutCard} from './aboutCard'
 import {aboutSection} from './aboutSection'
 import {contactUs} from './contactUs'
@@ -34,6 +36,8 @@ export const schemaTypes = [
   trainingsSection,
   formSection,
   aboutCard,
+  FAQCard,
+  FAQSection,
   storiesCard,
   storiesSection,
 ]
