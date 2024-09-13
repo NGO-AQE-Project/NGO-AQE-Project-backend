@@ -2,6 +2,8 @@ import {aboutCard} from './aboutCard'
 import {aboutSection} from './aboutSection'
 import {contactUs} from './contactUs'
 import example from './example'
+import { FAQCard } from './FAQCard'
+import { FAQSection } from './FAQSection'
 import formSection from './formSection'
 import {galleryCard} from './galleryCard'
 import gallerySection from './gallerySection'
@@ -32,4 +34,6 @@ export const schemaTypes = [
   trainingsSection,
   formSection,
   aboutCard,
+  FAQCard,
+  FAQSection,
 ]
