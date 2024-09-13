@@ -10,6 +10,8 @@ import {localeString} from './localeStringType'
 import {page} from './page'
 import {partner} from './partner'
 import partnersSection from './partnersSection'
+import {storiesCard} from './storiesCard'
+import {storiesSection} from './storiesSection'
 import {trainingsCard} from './trainingsCard'
 import trainingsSection from './trainingsSection'
 import {whyAQECard} from './whyAQECard'
@@ -32,4 +34,6 @@ export const schemaTypes = [
   trainingsSection,
   formSection,
   aboutCard,
+  storiesCard,
+  storiesSection,
 ]
