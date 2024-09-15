@@ -18,6 +18,8 @@ import {trainingsCard} from './trainingsCard'
 import trainingsSection from './trainingsSection'
 import {whyAQECard} from './whyAQECard'
 import whyAQESection from './whyAQESection'
+import { homeSection } from './homeSection'
+
 
 export const schemaTypes = [
   page,
@@ -40,4 +42,5 @@ export const schemaTypes = [
   FAQSection,
   storiesCard,
   storiesSection,
+  homeSection,
 ]
