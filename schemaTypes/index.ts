@@ -1,14 +1,25 @@
+import {FAQCard} from './FAQCard'
+import {FAQSection} from './FAQSection'
+import {aboutCard} from './aboutCard'
 import {aboutSection} from './aboutSection'
 import {contactUs} from './contactUs'
 import example from './example'
-import { homeSection } from './homeSection'
+import formSection from './formSection'
+import {galleryCard} from './galleryCard'
+import gallerySection from './gallerySection'
 import language from './language'
 import {localeString} from './localeStringType'
 import {page} from './page'
 import {partner} from './partner'
 import partnersSection from './partnersSection'
-import { whyAQECard } from './whyAQECard'
+import {storiesCard} from './storiesCard'
+import {storiesSection} from './storiesSection'
+import {trainingsCard} from './trainingsCard'
+import trainingsSection from './trainingsSection'
+import {whyAQECard} from './whyAQECard'
 import whyAQESection from './whyAQESection'
+import { homeSection } from './homeSection'
+
 
 export const schemaTypes = [
   page,
@@ -21,5 +32,15 @@ export const schemaTypes = [
   contactUs,
   whyAQECard,
   whyAQESection,
+  galleryCard,
+  gallerySection,
+  trainingsCard,
+  trainingsSection,
+  formSection,
+  aboutCard,
+  FAQCard,
+  FAQSection,
+  storiesCard,
+  storiesSection,
   homeSection,
 ]

@@ -1,7 +1,7 @@
-import { defineArrayMember, defineField, defineType } from "sanity";
+import {defineField, defineType} from 'sanity'
 
-export const aboutSection = defineType({
-  name: 'aboutSection',
+export const storiesSection = defineType({
+  name: 'storiesSection',
   type: 'document',
   fields: [
     defineField({
@@ -11,14 +11,10 @@ export const aboutSection = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'subsections', 
+      name: 'cards',
       type: 'array',
-      of: [{type: 'reference', to: [{type: 'aboutCard'}]}],
+      of: [{type: 'reference', to: [{type: 'storiesCard'}]}],
     }),
-    defineField({
-      name: 'image',
-      type: 'image',
-    })
   ],
   preview: {
     select: {
