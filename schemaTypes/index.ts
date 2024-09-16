@@ -19,6 +19,7 @@ import trainingsSection from './trainingsSection'
 import {whyAQECard} from './whyAQECard'
 import whyAQESection from './whyAQESection'
 import { homeSection } from './homeSection'
+import { navLinks } from './navLinks'
 
 
 export const schemaTypes = [
@@ -43,4 +44,5 @@ export const schemaTypes = [
   storiesCard,
   storiesSection,
   homeSection,
+  navLinks,
 ]
